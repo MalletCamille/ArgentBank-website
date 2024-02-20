@@ -7,17 +7,20 @@ import Home from '../src/pages/Home/Home.jsx'
 import Login from './pages/Login/Login.jsx'
 import User from '../src/pages/User/User.jsx';
 import Error from '../src/pages/Error/Error.jsx'
+import Layout from '../src/components/Layout/layout.jsx'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
         <Router>
-          <Routes>  
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/user" element={<User />} />
-            <Route path="*" element={<Error />} />
-          </Routes>  
+          <Layout>
+            <Routes>  
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/user" element={<User />} />
+              <Route path="*" element={<Error />} />
+            </Routes>
+          </Layout>  
         </Router>
   </React.StrictMode>
 );

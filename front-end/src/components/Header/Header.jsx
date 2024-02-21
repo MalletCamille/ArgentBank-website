@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'; 
-import argentBankLogo from '../../designs/img/argentBankLogo.png'; // Importation de l'image
-import '../Header/Header.css'
+import argentBankLogo from '../../designs/img/argentBankLogo.png'; 
+import '../../index.css'
 
 function Header() {
     return (
@@ -8,12 +8,12 @@ function Header() {
         <Link to="/" className="main-nav-logo">
           <img
             className="main-nav-logo-image"
-            src={argentBankLogo} // Utilisation directe de l'image importée
+            src={argentBankLogo} 
             alt="Argent Bank Logo"
           />
         </Link>
         <div>
-          <Link to="/sign-in" className="main-nav-item">
+          <Link to="/Login" className="main-nav-item">
             <i className="fa fa-user-circle"></i>
             Sign In
           </Link>

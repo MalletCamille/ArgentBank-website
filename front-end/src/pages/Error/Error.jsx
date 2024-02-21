@@ -1,3 +1,5 @@
+import '../../index.css'
+
 function Error () {
 return (
     <span>Ceci est la page d'erreur</span>

@@ -1,6 +1,11 @@
-function Home () {
+import Banner from '../../components/Banner/Banner.jsx'
+import '../../index.css'
+
+
+function Home () {    
 return (
-    <span>Ceci est la page d'accueil</span>
+    <Banner>
+    </Banner>    
 )
 }
 

@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
         <Router>
-          <Layout>
+          <Layout className='layout'>
             <Routes>  
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />

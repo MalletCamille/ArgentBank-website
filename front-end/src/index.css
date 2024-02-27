@@ -48,7 +48,33 @@ html {
     display: flex;
     flex-direction: column;
   }
+
+  .error__container {
+    background-color: #12002b;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   
+  .error__404 {
+    color: #fff;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-size: 200px;
+  }
+
+  .error__txt {
+    color: #fff;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-size: 40px;
+  }
+
+  .error__link {
+    color:  darkkhaki;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-size: 20px;
+  }
+
   .main-nav {
     display: flex;
     justify-content: space-between;

@@ -1,10 +1,14 @@
-import '../../index.css'
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { changeCredentialsField, login } from '../../store/login/loginSlice'
+import '../../index.css'
 
 function Form() {
+  const navigate = useNavigate();
   const dispatch = useDispatch()
   const { email, password } = useSelector((state) => state.login.credentials);
+  const status = useSelector((state) => state.login.status);
 
   function handleChangeEmail(event) {
     dispatch(changeCredentialsField({
@@ -24,6 +28,12 @@ function Form() {
     event.preventDefault();
     dispatch(login());
   }
+
+  useEffect(() => {
+    if (status === 'Success') {
+      navigate('/user')
+    }
+  }, [status, navigate])
 
   return (
     <main class="main bg-dark">

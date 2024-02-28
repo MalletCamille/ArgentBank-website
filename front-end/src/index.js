@@ -6,6 +6,7 @@ import Login from './pages/Login/Login.jsx'
 import User from './pages/User/User.jsx';
 import Error from './pages/Error/Error.jsx'
 import Layout from './components/Layout/layout.jsx'
+import Protected from './components/ProtectedRoute/Protected.jsx';
 import { store } from './store/store'
 import { Provider } from 'react-redux'
 
@@ -18,7 +19,11 @@ root.render(
               <Routes>  
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/user" element={<User />} />
+                <Route path="/user" element={
+                  <Protected>
+                    <User />
+                  </Protected>
+                } />
                 <Route path="*" element={<Error />} />
               </Routes>
             </Layout>  

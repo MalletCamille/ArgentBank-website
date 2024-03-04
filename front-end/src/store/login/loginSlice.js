@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
+
 const token = localStorage.getItem('token');
 
 const initialState = {
@@ -49,7 +50,7 @@ export const fetchUser = createAsyncThunk(
             const response = await fetch('http://localhost:3001/api/v1/user/profile', {
                 method: 'POST',
                 headers: {
-                    "Authorization": `Bearer ${token}`,
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`,
                     "Content-Type": 'application/json',
                 },
             });
@@ -100,8 +101,9 @@ const loginSlice = createSlice({
                 state.status = 'Loading...';
             })
             .addCase(login.fulfilled, (state, action) => {
+                console.log(action);
                 state.status = 'Success';
-                state.token = action.payload.token;
+                state.token = action.payload.body.token;
                 state.credentials.email = '';
                 state.credentials.password = '';
             })

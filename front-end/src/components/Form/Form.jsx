@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
-import { changeCredentialsField, login } from '../../store/login/loginSlice'
+import { changeCredentialsField, login, fetchUser } from '../../store/login/loginSlice'
 import '../../index.css'
 
 function Form() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const { email, password } = useSelector((state) => state.login.credentials);
-  const status = useSelector((state) => state.login.status);
+  const isLogged = useSelector((state) => state.login.logged);
 
   function handleChangeEmail(event) {
     dispatch(changeCredentialsField({
@@ -30,10 +30,11 @@ function Form() {
   }
 
   useEffect(() => {
-    if (status === 'Success') {
+    if (isLogged) {
+      dispatch(fetchUser());
       navigate('/user')
     }
-  }, [status, navigate])
+  }, [navigate, isLogged, dispatch])
 
   return (
     <main class="main bg-dark">
@@ -59,7 +60,6 @@ function Form() {
             <label htmlFor="remember-me">Remember me</label>
             </div>
             <button type='submit' className="sign-in-button">Sign In</button>
-            {/* <a href="./user.html" className="sign-in-button">Sign In</a> */}
         </form>
         </section>
     </main>    

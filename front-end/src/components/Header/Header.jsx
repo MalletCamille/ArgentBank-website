@@ -10,17 +10,19 @@ function Header() {
   const navigate = useNavigate();
   const { userName } = useSelector((state) => state.login.credentials);
   const token = useSelector((state) => state.login.token);
+  const isLogged = useSelector((state) => state.login.logged);
 
   function handleClickLogout() {
     dispatch(logout());
-    setTimeout(() => {
-      navigate('/');
-    }, "500ms");
+    navigate('/');
   }
 
   useEffect(() => {
-    dispatch(fetchUser());
-  }, [dispatch]);
+    if (isLogged) {
+      dispatch(fetchUser());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
 
     return (
@@ -45,7 +47,7 @@ function Header() {
               </Link>
             </>
           ): (
-          <Link to="/Login" className="main-nav-item">
+          <Link to="/login" className="main-nav-item">
             <i className="fa fa-user-circle"></i>
             Sign In
           </Link>

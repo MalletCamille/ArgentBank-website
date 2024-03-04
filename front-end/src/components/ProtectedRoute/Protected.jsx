@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 function Protected({ children }) {
-    const token = useSelector((state) => state.login.token);
+    const isLogged = useSelector((state) => state.login.logged);
 
-    if(!token) {
+    if(!isLogged) {
         return <Navigate to="/" replace />
     }
     return children;

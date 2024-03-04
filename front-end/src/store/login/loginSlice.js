@@ -1,14 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-
 const token = localStorage.getItem('token');
 
 const initialState = {
     credentials : {
         userName: '',
+        firstName: '',
+        lastName: '',
         email : '',
         password : '',
     },
+    logged: false,
+    editMode: false,
     token: token || '',
     status: 'idle',
 }
@@ -67,17 +70,45 @@ export const fetchUser = createAsyncThunk(
     }
 )
 
+export const updateUser = createAsyncThunk(
+    'login/UPDATE_USER',
+    async(_, thunkAPI) => {
+        const state = thunkAPI.getState();
+        const { userName } = state.login.credentials;
+        try {
+            const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+                method: "PUT",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem('token')}`,
+                    "Content-Type": 'application/json',
+                },
+                body: JSON.stringify({
+                    userName,
+                }),
+            });
+            if (!response.ok) {
+                const errorData = await response.json();
+                return thunkAPI.rejectWithValue(errorData);
+            }
+            const result = await response.json();
+            return result;
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+)
+
 
 const loginSlice = createSlice({
     name: 'login',
     initialState,
     reducers: {
+        toggleEditMode: (state) => {
+            state.editMode = !state.editMode;
+
+        },
         changeCredentialsField: (state, action) => {
-            const { field, value } = action.payload;
-            state.credentials = {
-              ...state.credentials,
-              [field]: value
-            }
+            state.credentials[action.payload.field] = action.payload.value;
         },
         logout: (state) => {
             state.token = '';
@@ -86,22 +117,35 @@ const loginSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            .addCase(updateUser.pending, (state) => {
+                state.status = 'Loading...'
+            })
+            .addCase(updateUser.fulfilled, (state, action) => {
+                state.logged = true;
+                state.credentials.userName = action.payload.body.userName;
+            })
+            .addCase(updateUser.rejected, (state) => {
+                state.status = 'Rejected';
+            })
             .addCase(fetchUser.pending, (state) => {
                 state.status = 'Loading...'
             })
             .addCase(fetchUser.fulfilled, (state, action) => {
                 state.status = 'Success';
+                state.logged = true;
                 state.credentials.userName = action.payload.body.userName;
                 state.credentials.email = action.payload.body.email;
             })
             .addCase(fetchUser.rejected, (state) => {
                 state.status = 'Rejected';
+                state.logged = false;
             })
             .addCase(login.pending, (state) => {
                 state.status = 'Loading...';
+                state.logged = false;
             })
             .addCase(login.fulfilled, (state, action) => {
-                console.log(action);
+                state.logged = true;
                 state.status = 'Success';
                 state.token = action.payload.body.token;
                 state.credentials.email = '';
@@ -109,10 +153,11 @@ const loginSlice = createSlice({
             })
             .addCase(login.rejected, (state) => {
                 state.status = 'Mauvais identifiants';
+                state.logged = false;
             });
     }
 });
 
-export const { changeCredentialsField, logout } = loginSlice.actions;
+export const { changeCredentialsField, logout, toggleEditMode } = loginSlice.actions;
 
 export default loginSlice.reducer;

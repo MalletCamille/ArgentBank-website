@@ -12,6 +12,7 @@ const initialState = {
     },
     logged: false,
     editMode: false,
+    hiddenMode: false,
     token: token || '',
     status: 'idle',
 }
@@ -107,6 +108,9 @@ const loginSlice = createSlice({
             const tokenState = localStorage.getItem('token');
             state.token = tokenState;
         },
+        toggleHiddenMode: (state) => {
+            state.hiddenMode = !state.hiddenMode;
+        },
         toggleEditMode: (state) => {
             state.editMode = !state.editMode;
         },
@@ -161,6 +165,6 @@ const loginSlice = createSlice({
     }
 });
 
-export const { changeCredentialsField, logout, toggleEditMode, updateLoginStatus } = loginSlice.actions;
+export const { changeCredentialsField, logout, toggleEditMode, updateLoginStatus, toggleHiddenMode } = loginSlice.actions;
 
 export default loginSlice.reducer;

@@ -12,29 +12,22 @@ function Button() {
 
     return (
         <>
-        {editMode ? (
-            <>
-                <button 
-                    type="submit"
-                    className='edit-button'
-                >
-                Save
-                </button>
-                <button 
-                    onClick={handleToggleEditMode}
-                    className='edit-button'
-                >
-                    Cancel
-                </button>
-            </>
-        ) : (
-            <button 
-                onClick={handleToggleEditMode}
-                className='edit-button'
-            >
-            Edit Name
-          </button>
-        )}
+            {editMode ? (
+                <>
+                    <button 
+                        type="submit"
+                        className='edit-button'
+                    >
+                    Save
+                    </button>
+                    <button 
+                        onClick={handleToggleEditMode}
+                        className='edit-button'
+                    >
+                        Cancel
+                    </button>
+                </>
+            ) : null}
         </>
     );
   }

@@ -103,9 +103,12 @@ const loginSlice = createSlice({
     name: 'login',
     initialState,
     reducers: {
+        updateLoginStatus: (state) => {
+            const tokenState = localStorage.getItem('token');
+            state.token = tokenState;
+        },
         toggleEditMode: (state) => {
             state.editMode = !state.editMode;
-
         },
         changeCredentialsField: (state, action) => {
             state.credentials[action.payload.field] = action.payload.value;
@@ -158,6 +161,6 @@ const loginSlice = createSlice({
     }
 });
 
-export const { changeCredentialsField, logout, toggleEditMode } = loginSlice.actions;
+export const { changeCredentialsField, logout, toggleEditMode, updateLoginStatus } = loginSlice.actions;
 
 export default loginSlice.reducer;

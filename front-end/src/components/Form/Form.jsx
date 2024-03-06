@@ -8,7 +8,7 @@ function Form() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const { email, password } = useSelector((state) => state.login.credentials);
-  const isLogged = useSelector((state) => state.login.logged);
+  const token = useSelector((state) => state.login.token);
 
   function handleChangeEmail(event) {
     dispatch(changeCredentialsField({
@@ -30,11 +30,11 @@ function Form() {
   }
 
   useEffect(() => {
-    if (isLogged) {
+    if (token) {
       dispatch(fetchUser());
       navigate('/user')
     }
-  }, [navigate, isLogged, dispatch])
+  }, [navigate, token, dispatch])
 
   return (
     <main class="main bg-dark">

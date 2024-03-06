@@ -10,7 +10,6 @@ function Header() {
   const navigate = useNavigate();
   const { userName } = useSelector((state) => state.login.credentials);
   const token = useSelector((state) => state.login.token);
-  const isLogged = useSelector((state) => state.login.logged);
 
   function handleClickLogout() {
     dispatch(logout());
@@ -18,7 +17,7 @@ function Header() {
   }
 
   useEffect(() => {
-    if (isLogged) {
+    if (token) {
       dispatch(fetchUser());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

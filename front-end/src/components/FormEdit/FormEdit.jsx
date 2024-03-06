@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCredentialsField, updateUser, toggleEditMode } from '../../store/login/loginSlice.js';
+import { changeCredentialsField, updateUser, toggleEditMode, updateLoginStatus } from '../../store/login/loginSlice.js';
 
 import Button from '../Button/Button.jsx';
 import '../../index.css'
@@ -20,19 +20,21 @@ function FormEdit() {
     function handleUpdateUser(event) {
         event.preventDefault();
         dispatch(updateUser());
+        dispatch(updateLoginStatus());
         dispatch(toggleEditMode());
-    }
+    };
 
     return (
         <>
 
         <h1>Edit User Info</h1>
-        <form 
+        <form className='form_edit'
             onSubmit={handleUpdateUser}
-        >
+            >
+            <>
         <div className="input-wrapper">
-          <label htmlFor="username">Username</label>
-          <input
+          <label htmlFor="username">User Name</label>
+          <input className='input'
             type="text"
             id="username"
             value={userName}
@@ -43,7 +45,7 @@ function FormEdit() {
 
         <div className="input-wrapper">
           <label htmlFor="First Name">First Name</label>
-          <input
+          <input className='input'
             type="text"
             id="firstname" 
             value={firstName}
@@ -52,7 +54,7 @@ function FormEdit() {
         </div>
         <div className="input-wrapper">
           <label htmlFor="Last Name">Last Name</label>
-          <input
+          <input className='input'
             type="text"
             id="lastname"
             value={lastName}
@@ -60,6 +62,7 @@ function FormEdit() {
           />
         </div>
         <Button />
+            </>
         </form>
         </>
 

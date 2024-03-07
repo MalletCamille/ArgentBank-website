@@ -307,6 +307,19 @@ html {
     color:white;
   }
   
+  .hidden {
+  display: none !important;
+  }
+
+  .colorRed {
+    display: block;
+    font-weight: bold;
+    color: red;
+    padding: 5px;
+    margin-bottom: 20px;
+    background-color: rgb(255, 206, 206);
+  }
+
   @media (min-width: 920px) {
     .hero {
       height: 400px;
@@ -334,6 +347,7 @@ html {
     
     .input-remember {
       display: flex;
+      align-items: baseline;
     }
     
     .input-remember label {

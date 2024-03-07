@@ -12,7 +12,6 @@ const initialState = {
     },
     logged: false,
     editMode: false,
-    hiddenMode: false,
     token: token || '',
     status: 'idle',
 }
@@ -164,7 +163,7 @@ const loginSlice = createSlice({
                 state.credentials.password = '';
             })
             .addCase(login.rejected, (state) => {
-                state.status = 'Mauvais identifiants';
+                state.status = "Rejected";
                 state.logged = false;
             });
     }

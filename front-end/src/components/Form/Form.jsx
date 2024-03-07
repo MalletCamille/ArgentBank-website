@@ -1,15 +1,20 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { changeCredentialsField, login, fetchUser } from '../../store/login/loginSlice'
 import '../../index.css'
 
+
+
+
 function Form() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const { email, password } = useSelector((state) => state.login.credentials);
-  const token = useSelector((state) => state.login.token);
-
+  const status = useSelector((state) => state.login.status);
+  const token = useSelector((state) => state.login.token)
+  const errorMessageRef = useRef(null);
+  
   function handleChangeEmail(event) {
     dispatch(changeCredentialsField({
       field: 'email',
@@ -27,6 +32,11 @@ function Form() {
   function handleSubmitLogin(event) {
     event.preventDefault();
     dispatch(login());
+    if (status === 'Rejected') {
+      errorMessageRef.current.classList.remove('hidden');
+    } else {
+      errorMessageRef.current.classList.add('hidden');
+    }
   }
 
   useEffect(() => {
@@ -41,6 +51,7 @@ function Form() {
         <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1 className='colordark'>Sign In</h1>
+        <span className='colorRed hidden'  ref={errorMessageRef}>Le nom d'utilisateur ou le mot de passe est incorrect</span>
         <form
           method='POST'
           onSubmit={handleSubmitLogin} 

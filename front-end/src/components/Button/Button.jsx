@@ -1,35 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleEditMode } from '../../store/login/loginSlice';
 import '../../index.css'
 
-function Button() {
-    const dispatch = useDispatch();
-    const editMode = useSelector((state) => state.login.editMode);
-
-    function handleToggleEditMode() {
-        dispatch(toggleEditMode);
-    }
-
+const Button = ({ children, onClick, type = 'button' }) => {
     return (
-        <>
-            {editMode ? (
-                <>
-                    <button 
-                        type="submit"
-                        className='edit-button'
-                    >
-                    Save
-                    </button>
-                    <button 
-                        onClick={handleToggleEditMode}
-                        className='edit-button'
-                    >
-                        Cancel
-                    </button>
-                </>
-            ) : null}
-        </>
+      <button className='button' type={type} onClick={onClick}>
+        {children}
+      </button>
     );
-  }
+  };
   
   export default Button;

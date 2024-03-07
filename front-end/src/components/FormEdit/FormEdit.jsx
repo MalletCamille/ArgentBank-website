@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCredentialsField, updateUser, toggleEditMode, toggleHiddenMode, updateLoginStatus } from '../../store/login/loginSlice.js';
+import { useRef } from 'react';
+import { changeCredentialsField, updateUser, toggleEditMode, updateLoginStatus } from '../../store/login/loginSlice.js';
 
 import Button from '../Button/Button.jsx';
 import '../../index.css'
@@ -7,47 +8,44 @@ import '../../index.css'
 
 function FormEdit() {
     const dispatch = useDispatch();
+    const usernameRef = useRef(null);
     const { userName, firstName, lastName } = useSelector((state) => state.login.credentials);
     const editMode = useSelector((state) => state.login.editMode);
-    const hiddenMode = useSelector((state) => state.login.hiddenMode);
-
-    function handleChangeUserNameField(event) {
-        dispatch(changeCredentialsField({
-            field: 'userName',
-            value: event.target.value
-        }));
-    }
 
     function handleUpdateUser(event) {
-        event.preventDefault();
+      event.preventDefault();
+      dispatch(changeCredentialsField({
+        field: 'userName',
+        value: usernameRef.current.value
+    }));
         dispatch(updateUser());
         dispatch(updateLoginStatus());
         dispatch(toggleEditMode());
-        dispatch(toggleHiddenMode());
     };
 
     function handleToggleEditMode() {
       dispatch(toggleEditMode());
-      dispatch(toggleHiddenMode());
+    }
+
+    function cancelEdit() {
+      dispatch(toggleEditMode());
     }
 
     return (
         <>
 
         <h1>Edit User Info</h1>
-        {hiddenMode ? (
+        {editMode? (
           <form className='form_edit'
               onSubmit={handleUpdateUser}
-              hidden={!hiddenMode}
           >
             <div className="input-wrapper">
               <label htmlFor="username">User Name</label>
               <input className='input'
                 type="text"
-                id="username"
-                value={userName}
-                onChange={handleChangeUserNameField}
-                disabled={!editMode}
+                 id="username"
+                 defaultValue={userName}
+                 ref={usernameRef}
               />
             </div>
     
@@ -69,15 +67,24 @@ function FormEdit() {
                 disabled
               />
             </div>
-            <Button />
+            <div className={`edit_button-wrapper ${editMode ? 'margin_left84' : ''}`}>
+              <Button onClick={handleUpdateUser}>
+              Save
+              </Button>
+              <Button onClick={cancelEdit}>
+                Cancel
+              </Button> 
+            </div>
           </form>
         ) : (
-          <button
-            onClick={handleToggleEditMode}
-            className='edit-button'
-          >
-            Edit Name
-          </button>
+          <div className='edit_button-wrapper'>
+            <button
+              onClick={handleToggleEditMode}
+              className='button'
+              >
+              Edit Name
+            </button>
+          </div>
         )}
         </>
 

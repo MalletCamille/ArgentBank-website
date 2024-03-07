@@ -40,7 +40,7 @@ function FormEdit() {
               onSubmit={handleUpdateUser}
           >
             <div className="input-wrapper">
-              <label htmlFor="username">User Name</label>
+              <label className='labelEdit' htmlFor="username">User Name</label>
               <input className='input'
                 type="text"
                  id="username"
@@ -50,7 +50,7 @@ function FormEdit() {
             </div>
     
             <div className="input-wrapper">
-              <label htmlFor="First Name">First Name</label>
+              <label className='labelEdit' htmlFor="First Name">First Name</label>
               <input className='input'
                 type="text"
                 id="firstname" 
@@ -59,7 +59,7 @@ function FormEdit() {
               />
             </div>
             <div className="input-wrapper">
-              <label htmlFor="Last Name">Last Name</label>
+              <label className='labelEdit' htmlFor="Last Name">Last Name</label>
               <input className='input'
                 type="text"
                 id="lastname"
@@ -67,7 +67,7 @@ function FormEdit() {
                 disabled
               />
             </div>
-            <div className={`edit_button-wrapper ${editMode ? 'margin_left84' : ''}`}>
+            <div className={`edit_button-wrapper`}>
               <Button onClick={handleUpdateUser}>
               Save
               </Button>

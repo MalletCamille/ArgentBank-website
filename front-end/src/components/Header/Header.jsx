@@ -13,6 +13,7 @@ function Header() {
 
   function handleClickLogout() {
     dispatch(logout());
+    dispatch()
     navigate('/');
   }
 
@@ -41,7 +42,7 @@ function Header() {
                 {userName}
               </Link>
               <Link to="/" className="main-nav-item" onClick={handleClickLogout}>
-                <i className="fa fa-user-circle"></i>
+                <i className="fa fa-sign-out"></i>
                 Logout
               </Link>
             </>

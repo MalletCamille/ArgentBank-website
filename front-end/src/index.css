@@ -14,6 +14,10 @@ html {
   h1 {
     color: #fff;
   }
+
+  .colordark {
+   color: #2c3e50;
+  }
   
   .main {
     flex: 1;
@@ -87,6 +91,10 @@ html {
     color: #2c3e50;
   }
   
+  .main-nav i {
+    margin-right: 5px;
+  }
+
   .main-nav a.router-link-exact-active {
     color: #42b983;
   }
@@ -142,10 +150,10 @@ html {
 
   .input-wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap : 5px;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    margin-bottom: 10px;
   }
 
   .form_edit {
@@ -280,10 +288,6 @@ html {
     align-items: center;
     gap: 20px;
   }
-
-  .margin_left84 {
-    margin-left: 84px;
-  }
   
   .button_wrapper_visibility {
     display: flex;
@@ -292,6 +296,15 @@ html {
     justify-content: center;
     align-items: center;
     margin-left: 84px;
+  }
+  
+  .input-wrapper input {
+    padding: 5px;
+    font-size: 1.2rem;
+  }
+
+  .labelEdit {
+    color:white;
   }
   
   @media (min-width: 920px) {
@@ -303,7 +316,7 @@ html {
     .features {
       flex-direction: row;
     }
-
+    
     .sign-in-button {
       display: block;
       width: 100%;
@@ -316,7 +329,7 @@ html {
       color: #fff;
     }
     .sign-in-icon {
-      font-size: 5rem;
+      font-size: 1rem;
     }
     
     .input-remember {
@@ -329,11 +342,6 @@ html {
     
     .input-wrapper label {
       font-weight: bold;
-    }
-    
-    .input-wrapper input {
-      padding: 5px;
-      font-size: 1.2rem;
     }
     
     .hero-content {

@@ -120,6 +120,11 @@ const loginSlice = createSlice({
         logout: (state) => {
             state.token = '';
             localStorage.removeItem('token');
+            state.credentials.userName = '';
+            state.credentials.firstName = '';
+            state.credentials.lastName = '';
+            state.credentials.email = '';
+            state.credentials.password = '';
         }
     },
     extraReducers: (builder) => {

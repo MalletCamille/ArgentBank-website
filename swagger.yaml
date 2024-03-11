@@ -164,7 +164,7 @@ paths:
           description: transactions deleted successfully
         '500':
            description: Internal Server Error
-  /transactions/updateCategory/{id}:
+  /transactions/updateCategory/{id}?categoryId={newCategoryId}:
     put:
       security :
         - Bearer: []
@@ -179,7 +179,7 @@ paths:
           type: integer
           description: ID of the Transaction
         - in: query                 
-          name: newCategoryID   
+          name: newCategoryId   
           required: true
           type: integer             
           description: ID of the new Category
@@ -192,7 +192,7 @@ paths:
             description: Invalid Fields      
         '500':
            description: Internal Server Error
-  /transactions/updateNote/{id}:
+  /transactions/updateNote/{id}?note={newNote}:
     put:
       security:
         - Bearer: []
@@ -298,5 +298,3 @@ definitions:
       balance:
         type: number
         format: float
-      
-    

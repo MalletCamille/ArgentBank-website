@@ -13,7 +13,6 @@ function Header() {
 
   function handleClickLogout() {
     dispatch(logout());
-    dispatch()
     navigate('/');
   }
 

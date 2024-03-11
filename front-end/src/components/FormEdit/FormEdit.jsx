@@ -33,8 +33,8 @@ function FormEdit() {
 
     return (
         <>
-
-        <h1>Edit User Info</h1>
+        <h1>Welcome back <br/>{userName}</h1>
+        <h2 className='colorwhite'>Edit User Info</h2>
         {editMode? (
           <form className='form_edit'
               onSubmit={handleUpdateUser}

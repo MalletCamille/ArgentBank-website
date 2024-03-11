@@ -146,6 +146,8 @@ const loginSlice = createSlice({
                 state.logged = true;
                 state.credentials.userName = action.payload.body.userName;
                 state.credentials.email = action.payload.body.email;
+                state.credentials.firstName = action.payload.body.firstName;
+                state.credentials.lastName = action.payload.body.lastName;
             })
             .addCase(fetchUser.rejected, (state) => {
                 state.status = 'Rejected';

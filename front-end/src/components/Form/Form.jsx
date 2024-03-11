@@ -32,12 +32,15 @@ function Form() {
   function handleSubmitLogin(event) {
     event.preventDefault();
     dispatch(login());
+  }
+
+  useEffect(() => {
     if (status === 'Rejected') {
       errorMessageRef.current.classList.remove('hidden');
     } else {
       errorMessageRef.current.classList.add('hidden');
     }
-  }
+  },[status])
 
   useEffect(() => {
     if (token) {
@@ -47,7 +50,7 @@ function Form() {
   }, [navigate, token, dispatch])
 
   return (
-    <main class="main bg-dark">
+    <main className="main bg-dark">
         <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1 className='colordark'>Sign In</h1>
@@ -70,7 +73,7 @@ function Form() {
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
             </div>
-            <button type='submit' className="sign-in-button">Sign In</button>
+            <button type='submit' className="button margintop15">Sign In</button>
         </form>
         </section>
     </main>    

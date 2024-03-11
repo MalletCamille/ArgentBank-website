@@ -18,6 +18,10 @@ html {
   .colordark {
    color: #2c3e50;
   }
+
+  .colorwhite {
+    color: white;
+  }
   
   .main {
     flex: 1;
@@ -262,6 +266,10 @@ html {
     width: 90px;
     margin-bottom: 20px;
     cursor: pointer;
+  }
+
+  .margintop15 {
+    margin-top: 15px;
   }
   
   .header {

@@ -65,11 +65,9 @@ paths:
         - User Module
       summary: User Profile API
       description: API for fetching a user profile
-      #produces:
-       # - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User profile retrieved successfully
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
@@ -94,7 +92,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User profile updated successfully
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
@@ -113,10 +111,10 @@ paths:
         - application/json
       responses:
         '200':
-          description: transactions retrieved successfully
-          schema:                      
-            type: array                 
-            items:                      
+          description: Transactions retrieved successfully
+          schema:
+            type: array
+            items:
               $ref: '#/definitions/Transaction'
         '500':
           description: Internal Server Error
@@ -126,91 +124,101 @@ paths:
         - Bearer: []
       tags:
         - Transactions Module
-      summary : Transactions API
+      summary: Transactions API
       description: API for creating Transactions
       parameters:
-      - in: body
-        name: body
-        description: Creating Transactions
-        required: true
-        schema:
-          $ref: '#/definitions/Transaction'
+        - in: body
+          name: body
+          description: Creating Transactions
+          required: true
+          schema:
+            $ref: '#/definitions/Transaction'
       produces:
         - application/json
       responses:
         '200':
-          description: transactions created successfully
+          description: Transaction created successfully
         '400':
-            description: Invalid Fields      
+          description: Invalid Fields      
         '500':
-           description: Internal Server Error
+          description: Internal Server Error
   /transactions/deleteTransaction/{id}:
     delete:
       security:
         - Bearer: []
       tags:
         - Transactions Module
-      summary : Transactions API
-      description : API for deleting Transactions
-      parameters:
-        - in: path            
-          name: id            
-          required: true
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: transactions deleted successfully
-        '500':
-           description: Internal Server Error
-  /transactions/updateCategory/{id}?categoryId={newCategoryId}:
-    put:
-      security :
-        - Bearer: []
-      tags:
-        - Transactions Module
       summary: Transactions API
-      description : API for updating Categories of Transactions
+      description: API for deleting Transactions
       parameters:
         - in: path
           name: id
           required: true
           type: integer
-          description: ID of the Transaction
-        - in: query                 
-          name: newCategoryId   
-          required: true
-          type: integer             
-          description: ID of the new Category
       produces:
         - application/json
       responses:
         '200':
-          description: Category updated successfully
-        '400':
-            description: Invalid Fields      
+          description: Transaction deleted successfully
         '500':
-           description: Internal Server Error
-  /transactions/updateNote/{id}?note={newNote}:
+          description: Internal Server Error
+  /transactions/updateCategory/{id}:
     put:
       security:
         - Bearer: []
       tags:
         - Transactions Module
       summary: Transactions API
-      description : API for updating Note of Transactions
+      description: API for updating Categories of Transactions
       parameters:
         - in: path
           name: id
           required: true
           type: integer
           description: ID of the Transaction
-        - in: query                 
-          name: newNote   
+        - in: body
+          name: body
+          description: Update transaction category
           required: true
-          type: string             
-          description: New Note of the Transaction
+          schema:
+            type: object
+            properties:
+              newCategoryId:
+                type: integer
+                description: ID of the new Category
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Category updated successfully
+        '400':
+          description: Invalid Fields      
+        '500':
+          description: Internal Server Error
+  /transactions/updateNote/{id}:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: Transactions API
+      description: API for updating Note of Transactions
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+          description: ID of the Transaction
+        - in: body
+          name: body
+          description: Update transaction note
+          required: true
+          schema:
+            type: object
+            properties:
+              newNote:
+                type: string
+                description: New Note of the Transaction
       produces:  
         - application/json
       responses:
@@ -219,7 +227,7 @@ paths:
         '400':
           description: Invalid Fields      
         '500':
-          description: Internal Server Error          
+          description: Internal Server Error
 securityDefinitions:
   Bearer:
     type: apiKey

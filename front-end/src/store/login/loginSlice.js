@@ -12,15 +12,15 @@ const initialState = {
     },
     logged: false,
     editMode: false,
-    token: token || '',
-    status: 'idle',
+    token: token || '', // si la variable token n'est pas undefined alors la valeur de token sinon chaîne de caractère vide //
+    status: 'idle', // status de l'état de la requête en cours //
 }
 
 export const login = createAsyncThunk(
-    'login/LOGIN', 
+    'login/LOGIN', // type de l'action dans le store //
     async(_, thunkAPI) => {
-        const state = thunkAPI.getState();
-        const { email, password } = state.login.credentials;
+        const state = thunkAPI.getState(); 
+        const { email, password } = state.login.credentials; // on récupère l'email et le password dans le state //
         try {
             const response = await fetch('http://localhost:3001/api/v1/user/login', {
                 method : "POST",
@@ -33,12 +33,11 @@ export const login = createAsyncThunk(
                 })
             });
             if (!response.ok) {
-                const errorResponse = await response.json();
-                return thunkAPI.rejectWithValue(errorResponse);
+                const errorResponse = await response.json(); // on récupère la réponse du back //
+                return thunkAPI.rejectWithValue(errorResponse); // rejectWithValue permet de gérer l'erreur un peu à la manière de catch //
             }
             const res = await response.json()
-            localStorage.setItem('token', res.body.token);
-            console.log('data', res);
+            localStorage.setItem('token', res.body.token);  // on récupère l'objet qu'on appelle token dans le localStorage et on lui attribue sa valeur //
             return res;
         } catch (error) {
             console.error(error.message);
@@ -57,7 +56,6 @@ export const fetchUser = createAsyncThunk(
                     "Content-Type": 'application/json',
                 },
             });
-            console.log(token);
             if (!response.ok) {
                 const errorData = await response.json();
                 return thunkAPI.rejectWithValue(errorData);
@@ -98,7 +96,6 @@ export const updateUser = createAsyncThunk(
     }
 )
 
-
 const loginSlice = createSlice({
     name: 'login',
     initialState,
@@ -107,14 +104,11 @@ const loginSlice = createSlice({
             const tokenState = localStorage.getItem('token');
             state.token = tokenState;
         },
-        toggleHiddenMode: (state) => {
-            state.hiddenMode = !state.hiddenMode;
-        },
         toggleEditMode: (state) => {
-            state.editMode = !state.editMode;
+            state.editMode = !state.editMode; // on fait une mise à jour du mode édition en prenant la valeur inverse du bouléen //
         },
         changeCredentialsField: (state, action) => {
-            state.credentials[action.payload.field] = action.payload.value;
+            state.credentials[action.payload.field] = action.payload.value; // on fait une mise à jour d'un des champs de credentials en appliquant la nouvelle valeur du field //
         },
         logout: (state) => {
             state.token = '';
@@ -124,7 +118,7 @@ const loginSlice = createSlice({
             state.credentials.lastName = '';
             state.credentials.email = '';
             state.credentials.password = '';
-        }
+        } 
     },
     extraReducers: (builder) => {
         builder
@@ -171,6 +165,6 @@ const loginSlice = createSlice({
     }
 });
 
-export const { changeCredentialsField, logout, toggleEditMode, updateLoginStatus, toggleHiddenMode } = loginSlice.actions;
+export const { changeCredentialsField, logout, toggleEditMode, updateLoginStatus, toggleHiddenMode } = loginSlice.actions; 
 
 export default loginSlice.reducer;

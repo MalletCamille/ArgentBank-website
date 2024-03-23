@@ -99,67 +99,83 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /transactions/getTransactions:      
+  paths:
+  /user/transactions/{accountId}:
     get:
       security:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: Transactions API
-      description: API for getting Transactions
+      summary: Get User Account Transactions
+      description: Retrieve all transactions for the specified account and given month
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          type: integer
+          description: ID of the Account
+        - in: query
+          name: month
+          required: true
+          type: integer
+          description: Month for which transactions are requested (1 for January, 2 for February, etc.)
       produces:
         - application/json
       responses:
         '200':
-          description: Transactions retrieved successfully
+          description: User account transactions retrieved successfully
           schema:
             type: array
             items:
               $ref: '#/definitions/Transaction'
+        '404':
+          description: Account not found or no transactions for the specified month
         '500':
           description: Internal Server Error
-  /transactions/createTransaction:
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - Transactions Module
-      summary: Transactions API
-      description: API for creating Transactions
-      parameters:
-        - in: body
-          name: body
-          description: Creating Transactions
-          required: true
-          schema:
-            $ref: '#/definitions/Transaction'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Transaction created successfully
-        '400':
-          description: Invalid Fields      
-        '500':
-          description: Internal Server Error
-  /transactions/deleteTransaction/{id}:
+  /transactions/deleteCategory/{id}:
     delete:
       security:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: Transactions API
-      description: API for deleting Transactions
+      summary: Delete Transaction Category
+      description: Delete the category of a specific transaction
       parameters:
         - in: path
           name: id
           required: true
           type: integer
+          description: ID of the Transaction
       produces:
         - application/json
       responses:
         '200':
-          description: Transaction deleted successfully
+          description: Transaction category deleted successfully
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+  /transactions/deleteNote/{id}:
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: Delete Transaction Note
+      description: Delete the note of a specific transaction
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: integer
+          description: ID of the Transaction
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction note deleted successfully
+        '404':
+          description: Transaction not found
         '500':
           description: Internal Server Error
   /transactions/updateCategory/{id}:
@@ -168,8 +184,8 @@ paths:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: Transactions API
-      description: API for updating Categories of Transactions
+      summary: Update Transaction Category
+      description: Update the category of a specific transaction
       parameters:
         - in: path
           name: id
@@ -193,6 +209,8 @@ paths:
           description: Category updated successfully
         '400':
           description: Invalid Fields      
+        '404':
+          description: Transaction not found
         '500':
           description: Internal Server Error
   /transactions/updateNote/{id}:
@@ -201,8 +219,8 @@ paths:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: Transactions API
-      description: API for updating Note of Transactions
+      summary: Update Transaction Note
+      description: Update the note of a specific transaction
       parameters:
         - in: path
           name: id
@@ -226,6 +244,8 @@ paths:
           description: Note updated successfully
         '400':
           description: Invalid Fields      
+        '404':
+          description: Transaction not found
         '500':
           description: Internal Server Error
 securityDefinitions:
@@ -236,73 +256,4 @@ securityDefinitions:
 definitions:
   User:
     properties:
-      email:
-        type: string
-        description: user email
-      password:
-        type: string
-        description: user password
-      firstName:
-        type: string
-        description: user first name
-      lastName:
-        type: string
-        description: user last name
-      userName:
-        type: string
-        description: user public name
-  Login:
-    properties:
-      email:
-        type: string
-        description: user email
-      password:
-        type: string
-        description: user password
-  ApiResponse:
-    type: object
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: object
-        properties:
-          id:
-            type: string
-          email:
-            type: string
-  LoginResponse:
-    type: object
-    properties:
-      token:
-        type: string
-  UserProfile:
-    type: object
-    properties:
-      userName:
-        type: string    
-  Transaction:
-    type: object
-    properties: 
-      description:
-        type: string
-      category:
-        type: object
-        properties:
-          id: 
-            type: integer
-          label: 
-            type: string
-      note:
-        type: string
-      date:
-        type: string
-        format: date-time
-      amount:
-        type: number
-        format: float
-      balance:
-        type: number
-        format: float
+      email

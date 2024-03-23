@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, fetchUser } from '../../store/login/loginSlice.js';
-import argentBankLogo from '../../designs/img/argentBankLogo.png';
+import argentBankLogo from '../../designs/img optimisées/argentBankLogo.webp';
 import '../../index.css' 
 
 function Header() {

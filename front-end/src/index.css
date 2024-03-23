@@ -220,10 +220,9 @@ html {
     padding: 0;
   }
   
-  .account {
+  .transaction {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     border: 1px solid black;
     background-color: #fff;
     width: 80%;
@@ -234,7 +233,18 @@ html {
     text-align: left;
     margin-bottom: 2rem;
   }
+
+  .account {
+    padding: 1.5rem;
+    box-sizing: border-box;
+    margin-bottom: 2rem;
+  }
   
+  .account-item {
+    display: flex;
+    flex-direction: row;
+  }
+
   .account-amount {
     margin: 0;
     font-size: 2.5rem;
@@ -385,9 +395,6 @@ html {
   }
   
   @media (min-width: 720px) {
-    .account {
-      flex-direction: row;
-    }
   
     .account-content-wrapper.cta {
       flex: 0;
@@ -419,6 +426,14 @@ html {
      .button_wrapper_visibility {
       margin-left: 0px;
      }
+
+     .account-item {
+      flex-direction: column;
+    }
+
+    .account-amount {
+      font-size: 1.5em;
+    }
 
   }
   

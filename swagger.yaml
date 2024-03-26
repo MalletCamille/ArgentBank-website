@@ -122,16 +122,16 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
-          description: User account transactions retrieved successfully
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Transaction'
-        '404':
-          description: Account not found or no transactions for the specified month
-        '500':
-          description: Internal Server Error
+    '200':
+      description: User account transactions retrieved successfully
+      schema:
+        type: array
+        items:
+          $ref: '#/definitions/Transaction'
+    '404':
+      description: Account not found or no transactions for the specified month
+    '500':
+      description: Internal Server Error
   /transactions/deleteCategory/{id}:
     delete:
       security:
@@ -149,7 +149,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        '204':
           description: Transaction category deleted successfully
         '404':
           description: Transaction not found
@@ -172,7 +172,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        '204':
           description: Transaction note deleted successfully
         '404':
           description: Transaction not found
@@ -213,41 +213,41 @@ paths:
           description: Transaction not found
         '500':
           description: Internal Server Error
-  /transactions/updateNote/{id}:
-    put:
-      security:
-        - Bearer: []
-      tags:
-        - Transactions Module
-      summary: Update Transaction Note
-      description: Update the note of a specific transaction
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: integer
-          description: ID of the Transaction
-        - in: body
-          name: body
-          description: Update transaction note
-          required: true
-          schema:
-            type: object
-            properties:
-              newNote:
-                type: string
-                description: New Note of the Transaction
-      produces:  
-        - application/json
-      responses:
-        '200':
-          description: Note updated successfully
-        '400':
-          description: Invalid Fields      
-        '404':
-          description: Transaction not found
-        '500':
-          description: Internal Server Error
+/transactions/updateNote/{id}:
+  put:
+    security:
+      - Bearer: []
+    tags:
+      - Transactions Module
+    summary: Update Transaction Note
+    description: Update the note of a specific transaction
+    parameters:
+      - in: path
+        name: id
+        required: true
+        type: integer
+        description: ID of the Transaction
+      - in: body
+        name: body
+        description: Update transaction note
+        required: true
+        schema:
+          type: object
+          properties:
+            newNote:
+              type: string
+              description: New Note of the Transaction
+    produces:  
+      - application/json
+    responses:
+      '200':
+        description: Note updated successfully
+      '400':
+        description: Invalid Fields      
+      '404':
+        description: Transaction not found
+      '500':
+        description: Internal Server Error
 securityDefinitions:
   Bearer:
     type: apiKey

@@ -99,25 +99,20 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/transactions/{accountId}:
+  /user/transactions/{accountId}/currentMonth:
     get:
       security:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: Get User Account Transactions
-      description: Retrieve all transactions for the specified account and given month
+      summary: Get User Account Transactions for Current Month
+      description: Retrieve all transactions for the specified account and the current month
       parameters:
         - in: path
           name: accountId
           required: true
           type: integer
           description: ID of the Account
-        - in: query
-          name: month
-          required: true
-          type: integer
-          description: Month for which transactions are requested (1 for January, 2 for February, etc.)
       produces:
         - application/json
       responses:
@@ -196,12 +191,18 @@ paths:
           description: Update transaction category
           required: true
           schema:
-            $ref: '#/definitions/UpdateCategoryPayload'
+            type: object
+            properties:
+              newCategoryId:
+                type: integer
+                description: ID of the new Category
       produces:
         - application/json
       responses:
         '200':
           description: Category updated successfully
+          schema:
+              $ref: '#/definitions/Transaction'
         '400':
           description: Invalid Fields      
         '404':
@@ -227,12 +228,18 @@ paths:
           description: Update transaction note
           required: true
           schema:
-            $ref: '#/definitions/UpdateNotePayload'
+            type: object
+            properties:
+              newnote:
+                type: string
+                description: note of the Transaction
       produces:  
         - application/json
       responses:
         '200':
           description: Note updated successfully
+          schema:
+            $ref: '#/definitions/Transaction'
         '400':
           description: Invalid Fields      
         '404':
@@ -266,4 +273,7 @@ definitions:
       category:
         type: string
       date:
-        type: integer
+        type: string
+        format: date
+      note:
+        type: string

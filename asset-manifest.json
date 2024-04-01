@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/ArgentBank/static/css/main.eb952aa7.css",
+    "main.js": "/ArgentBank/static/js/main.bfc0da7d.js",
+    "static/media/bank-tree.webp": "/ArgentBank/static/media/bank-tree.25a38cb1f7965fd8ed35.webp",
+    "static/media/argentBankLogo.webp": "/ArgentBank/static/media/argentBankLogo.6ae02d404e67c5ec0ec1.webp",
+    "static/media/icon-security.webp": "/ArgentBank/static/media/icon-security.d2abbe21ca515678ffd5.webp",
+    "static/media/icon-chat.webp": "/ArgentBank/static/media/icon-chat.ed28cc66595915a2e190.webp",
+    "static/media/icon-money.webp": "/ArgentBank/static/media/icon-money.0f653810863f8347801d.webp",
+    "index.html": "/ArgentBank/index.html",
+    "main.eb952aa7.css.map": "/ArgentBank/static/css/main.eb952aa7.css.map",
+    "main.bfc0da7d.js.map": "/ArgentBank/static/js/main.bfc0da7d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eb952aa7.css",
+    "static/js/main.bfc0da7d.js"
+  ]
+}
